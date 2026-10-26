@@ -21,6 +21,9 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PATH="/opt/venv/bin:$PATH" \
     MODEL_PATH=/app/models/model.joblib \
     MODEL_VERSION=${GIT_SHA}
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends --only-upgrade libssl3 openssl \
+ && rm -rf /var/lib/apt/lists/*
 RUN useradd --system --uid 10001 --no-create-home appuser
 WORKDIR /app
 COPY --from=builder /opt/venv /opt/venv
