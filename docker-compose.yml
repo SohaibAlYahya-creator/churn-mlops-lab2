@@ -1,0 +1,8 @@
+services:
+  churn:
+    build:
+      context: .
+      args:
+        GIT_SHA: ${GIT_SHA:-local}
+    ports:
+      - "8000:8000"
